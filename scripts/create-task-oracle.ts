@@ -1,11 +1,13 @@
 import hre from "hardhat";
-import { AutomateSDK, Web3Function } from "@gelatonetwork/automate-sdk";
-import { CoingeckoOracle } from "../typechain";
+import {
+  AutomateSDK,
+  TriggerType,
+  Web3Function,
+} from "@gelatonetwork/automate-sdk";
 
 const { ethers, w3f } = hre;
 
 const main = async () => {
-  const oracle = <CoingeckoOracle>await ethers.getContract("CoingeckoOracle");
   const oracleW3f = w3f.get("oracle");
 
   const [deployer] = await ethers.getSigners();
@@ -20,13 +22,15 @@ const main = async () => {
   console.log(`Web3Function IPFS CID: ${cid}`);
 
   // Create task using automate sdk
-  console.log("Creating automate task...");
+  console.log(`Creating oracle updater`);
   const { taskId, tx } = await automate.createBatchExecTask({
-    name: "Web3Function - Eth Oracle",
+    name: "Web3Function - Update Oracle",
     web3FunctionHash: cid,
-    web3FunctionArgs: {
-      oracle: oracle.address,
-      currency: "ethereum",
+    web3FunctionArgs: {},
+    trigger: {
+      type: TriggerType.TIME,
+      interval: 60000, // ms (1 min)
+      start: undefined,
     },
   });
   await tx.wait();
@@ -41,7 +45,7 @@ const main = async () => {
     await web3Function.secrets.set(secrets, taskId);
     console.log(`Secrets set`);
   }
-};
+}
 
 main()
   .then(() => {

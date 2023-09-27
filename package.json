@@ -5,7 +5,8 @@
   "repository": "https://github.com/gelatodigital/web3-functions-hardhat-template",
   "private": false,
   "scripts": {
-    "build": "yarn clean && yarn install && yarn compile && npx tsc",
+    "build": "yarn clean && yarn install && yarn compile && yarn generate-types && npx tsc",
+    "generate-types": "typechain ./node_modules/@hai-on-op/abis/abi/*.json --target ethers-v5 --out-dir ./typechain",
     "compile": "npx hardhat compile --force",
     "clean": "rm -rf dist",
     "deploy": "npx hardhat deploy",
@@ -16,7 +17,6 @@
     "lint:sol": "solhint contracts/**/*.sol",
     "test": "npx hardhat test",
     "verify": "npx hardhat etherscan-verify",
-    "create-task:adboard": "npx hardhat run ./scripts/create-task-adboard.ts",
     "create-task:oracle": "npx hardhat run ./scripts/create-task-oracle.ts"
   },
   "license": "ISC",
@@ -30,7 +30,7 @@
     "@nomiclabs/hardhat-waffle": "^2.0.5",
     "@openzeppelin/contracts": "4.8.1",
     "@tsconfig/recommended": "1.0.2",
-    "@typechain/ethers-v5": "10.2.0",
+    "@typechain/ethers-v5": "11.0.0",
     "@typechain/hardhat": "6.1.5",
     "@types/chai": "4.3.4",
     "@types/mocha": "10.0.1",
@@ -50,10 +50,10 @@
     "prettier": "2.8.4",
     "prettier-plugin-solidity": "1.1.2",
     "solhint": "3.4.0",
-    "solhint-plugin-prettier": "0.0.5",
+    "solhint-plugin-defi-wonderland": "1.1.0",
     "ts-generator": "0.1.1",
     "ts-node": "10.9.1",
-    "typechain": "8.1.1",
+    "typechain": "8.2.0",
     "typescript": "4.9.5"
   },
   "lint-staged": {
@@ -61,7 +61,8 @@
     "*.*{ts,js}": "eslint -c .eslintrc.json"
   },
   "dependencies": {
-    "@gelatonetwork/automate-sdk": "^2.16.0-beta",
+    "@hai-on-op/abis": "0.1.2",
+    "@gelatonetwork/automate-sdk": "^2.18.0-beta",
     "@gelatonetwork/web3-functions-sdk": "^2.1.3",
     "ky": "^0.33.2"
   }

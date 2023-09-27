@@ -4,7 +4,7 @@
   "memory": 128,
   "timeout": 30,
   "userArgs": {
-    "currency": "string",
-    "oracle": "string"
+    "collateralTypes": "string[]",
+    "oracleRelayerAddress": "string"
   }
 }
