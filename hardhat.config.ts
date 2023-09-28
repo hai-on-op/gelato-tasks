@@ -42,12 +42,6 @@ const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
 
   networks: {
-    hardhat: {
-      forking: {
-        url: `https://opt-goerli.g.alchemy.com/v2/${ALCHEMY_ID}`,
-        blockNumber: 15103838,
-      },
-    },
 
     // Prod
     optimism: {

@@ -4,6 +4,8 @@ import { before } from "mocha";
 import { Web3FunctionHardhat } from "@gelatonetwork/web3-functions-sdk/hardhat-plugin";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { Web3FunctionResultCallData } from "@gelatonetwork/web3-functions-sdk/*";
+import { forkBlock } from "./utils";
+import { IDelayedOracle__factory } from "../typechain";
 
 const { w3f } = hre;
 
@@ -12,7 +14,7 @@ const BLOCKS = {
   NONE_UPDETEABLE: 15195788,
 }
 
-describe.only("Oracle Update Tests", function () {
+describe("Oracle Update Tests", function () {
   this.timeout(0);
 
   let owner: SignerWithAddress;
@@ -25,45 +27,29 @@ describe.only("Oracle Update Tests", function () {
     oracleW3f = w3f.get("oracle");
   });
 
-  it("Return canExec: true", async () => {
+  it("Should not be executable when there is no oracles to update", async () => {
+    await forkBlock(BLOCKS.NONE_UPDETEABLE);
+    
+    const { result } = await oracleW3f.run();
+
+    expect(result.canExec).to.equal(false);
+  });
+
+  it("Should prepare txs to update oracles when there are any to update", async () => {
+    const updateResultData = IDelayedOracle__factory.createInterface().encodeFunctionData('updateResult');
+    await forkBlock(BLOCKS.ALL_UPDETEABLE);
+    
     const { result } = await oracleW3f.run();
 
     expect(result.canExec).to.equal(true);
-  });
+    
+    // this is done for typescript to know that result.canExec is true and for result.callData to exist
+    if (!result.canExec) return;
 
-  it("Should try to update updeteable oracles", async () => {
-    const { result } = await oracleW3f.run();
+    expect(result.callData.length).to.be.gt(0);
 
-    if (result.canExec) {
-      for (let i = 0; i < result.callData.length; i++) {
-        const calldata = result.callData[i] as Web3FunctionResultCallData;
-        
-        const tx = await owner.sendTransaction({
-          to: calldata.to,
-          data: calldata.data,
-          gasPrice: "10000000000", // TODO: can we do _?
-        });
-        
-        console.log(await tx.wait());
-      }
-    }
-  });
-
-  it("Should run the batch", async () => {
-    const { result } = await oracleW3f.run();
-
-    if (result.canExec) {
-      for (let i = 0; i < result.callData.length; i++) {
-        const calldata = result.callData[i] as Web3FunctionResultCallData;
-        
-        const tx = await owner.sendTransaction({
-          to: calldata.to,
-          data: calldata.data,
-          gasPrice: "10000000000", // TODO: can we do _?
-        });
-        
-        console.log(await tx.wait());
-      }
-    }
+    (result.callData as Web3FunctionResultCallData[]).forEach(({data}) => {
+      expect(data).to.equal(updateResultData, "callData should be `updateResult` for all oracles");
+    });
   });
 });
