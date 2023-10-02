@@ -42,7 +42,6 @@ const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
 
   networks: {
-
     // Prod
     optimism: {
       chainId: 10,

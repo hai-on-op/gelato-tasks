@@ -4,7 +4,7 @@ import {
   Web3FunctionResultCallData,
 } from "@gelatonetwork/web3-functions-sdk";
 import { ethers } from "ethers";
-import { IDelayedOracle__factory } from "../../typechain";
+import { IDelayedOracle__factory } from "../../typechain/factories";
 import BatchOracleChecker from "../../artifacts/contracts/BatchOracleChecker.sol/BatchOracleChecker.json";
 
 interface SafeData {
@@ -37,11 +37,13 @@ Web3Function.onRun(async (context: Web3FunctionContext) => {
 
   const txs: Web3FunctionResultCallData[] = decoded
     // Filter out oracles that don't need to be updated
-    .filter(({shouldUpdate}) => shouldUpdate)
+    .filter(({ shouldUpdate }) => shouldUpdate)
     // Map to transaction requests
-    .map(({oracle}) => ({
+    .map(({ oracle }) => ({
       to: oracle,
-      data: IDelayedOracle__factory.createInterface().encodeFunctionData('updateResult'),
+      data: IDelayedOracle__factory.createInterface().encodeFunctionData(
+        "updateResult"
+      ),
     }));
 
   // Return the transaction requests if there are any
