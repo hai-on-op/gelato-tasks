@@ -37,6 +37,7 @@ To deploy the web3 functions (requires `env.PRIVATE_KEY`), you can use the follo
 ```
 yarn create-task:oracle
 yarn create-task:debt-popper
+yarn create-task:state-update
 ```
 
 ### Deployed Web3 Functions
@@ -49,3 +50,7 @@ yarn create-task:debt-popper
   - IPFS CID: `QmerskF12CsftbBMFsbwgtF18ibrhxNPoVne1Zmvhqmavu`
   - Task ID: `0x66848342b1d9f7678352fbcc9cfa31318557963116c0e0bfc6906b2b49405ca5`
   - Deployment Tx: `0xa29e65e40459a83fdfe3cf3f200f375ceae65d3b05dc5db067bc933b1bc055dc`
+- State updater:
+  - IPFS CID: `Qmaw59KW6zJGLKJbmAC4W1HX68adEbfzKKRi36UkZdbgja`
+  - Task ID: `0xc68ae72b8ace3c2ec3f8f4fac6b41f578a3ac3d49d1d5f4916ffcbdbcc88254f`
+  - Deployment Tx: `0xce198c626965a4910ab2cd9716dc3527c9da552d57a11f835cffc48c85b1f23f`

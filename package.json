@@ -18,7 +18,8 @@
     "test": "npx hardhat test",
     "verify": "npx hardhat etherscan-verify",
     "create-task:oracle": "npx hardhat run ./scripts/create-task-oracle.ts --network optimismGoerli",
-    "create-task:debt-popper": "npx hardhat run ./scripts/create-task-debt-popper.ts --network optimismGoerli"
+    "create-task:debt-popper": "npx hardhat run ./scripts/create-task-debt-popper.ts --network optimismGoerli",
+    "create-task:state-update": "npx hardhat run ./scripts/create-task-state-update.ts --network optimismGoerli"
   },
   "license": "ISC",
   "devDependencies": {

@@ -21,21 +21,20 @@ interface IOracleRelayerLike {
  * @notice Checks the Delayed Oracles (for a given list of Collateral Types) should be updated and returns a boolean array of the results.
  */
 contract BatchOracleChecker {
-
     struct OracleStatus {
         bytes32 cType;
         IDelayedOracleLike oracle;
         bool shouldUpdate;
     }
 
-    mapping (bytes32 => OracleStatus) public delayedOracles;
+    mapping(bytes32 => OracleStatus) public delayedOracles;
 
     constructor(IOracleRelayerLike _oracleRelayer, bytes32[] memory _collateralTypes) {
         OracleStatus[] memory _data = new OracleStatus[](_collateralTypes.length);
 
         for (uint256 _i; _i < _collateralTypes.length; _i++) {
             bytes32 _cType = _collateralTypes[_i];
-            
+
             _data[_i] = OracleStatus({
                 cType: _cType,
                 oracle: _oracleRelayer.cParams(_cType).oracle,
