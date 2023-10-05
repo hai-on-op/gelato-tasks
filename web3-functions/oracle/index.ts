@@ -4,7 +4,10 @@ import {
   Web3FunctionResultCallData,
 } from "@gelatonetwork/web3-functions-sdk";
 import { ethers } from "ethers";
-import { IDelayedOracle__factory } from "../../typechain/factories";
+import {
+  IDelayedOracle__factory,
+  IOracleRelayer__factory,
+} from "../../typechain/factories";
 import BatchOracleChecker from "../../artifacts/contracts/BatchOracleChecker.sol/BatchOracleChecker.json";
 
 interface SafeData {
@@ -35,16 +38,26 @@ Web3Function.onRun(async (context: Web3FunctionContext) => {
     returnedData
   )[0] as SafeData[];
 
-  const txs: Web3FunctionResultCallData[] = decoded
+  const txs = decoded
     // Filter out oracles that don't need to be updated
     .filter(({ shouldUpdate }) => shouldUpdate)
-    // Map to transaction requests
-    .map(({ oracle }) => ({
-      to: oracle,
-      data: IDelayedOracle__factory.createInterface().encodeFunctionData(
-        "updateResult"
-      ),
-    }));
+    // Map the remaining oracles to update the oracle result and relayer's collateral price
+    .reduce((acc, { oracle, cType }) => [
+      ...acc,
+      {
+        to: oracle,
+        data: IDelayedOracle__factory.createInterface().encodeFunctionData(
+          "updateResult"
+        ),
+      },
+      {
+        to: userArgs.oracleRelayerAddress as string,
+        data: IOracleRelayer__factory.createInterface().encodeFunctionData(
+          "updateCollateralPrice",
+          [cType]
+        ),
+      }
+    ], [] as Web3FunctionResultCallData[]);
 
   // Return the transaction requests if there are any
   if (txs.length) {

@@ -3,8 +3,11 @@ import { expect } from "chai";
 import { before } from "mocha";
 import { Web3FunctionHardhat } from "@gelatonetwork/web3-functions-sdk/hardhat-plugin";
 import { Web3FunctionResultCallData } from "@gelatonetwork/web3-functions-sdk/*";
-import { forkBlock } from "./utils";
-import { IDelayedOracle__factory } from "../typechain/factories";
+import { forkBlock, splitIntoChunks } from "./utils";
+import {
+  IDelayedOracle__factory,
+  IOracleRelayer__factory,
+} from "../typechain/factories";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 const { w3f } = hre;
@@ -34,10 +37,12 @@ describe("Oracle Update Tests", function () {
   });
 
   it("Should prepare txs to update oracles when there are any to update", async () => {
+    const collateralTypes = oracleW3f.getUserArgs().collateralTypes as string[];
     const updateResultData =
       IDelayedOracle__factory.createInterface().encodeFunctionData(
         "updateResult"
       );
+
     await forkBlock(BLOCKS.ALL_UPDETEABLE);
 
     const { result } = await oracleW3f.run();
@@ -49,10 +54,22 @@ describe("Oracle Update Tests", function () {
 
     expect(result.callData.length).to.be.gt(0);
 
-    (result.callData as Web3FunctionResultCallData[]).forEach(({ data }) => {
-      expect(data).to.equal(
+    // divide the txs into chunks of 2, each chunk should be relative to a cType
+    const chunks = splitIntoChunks(result.callData as Web3FunctionResultCallData[], 2);
+
+    // iterate over the chunks and check that the txs are correct
+    chunks.forEach(([updateResultTx, updateCollateralPriceTx], index) => {
+      expect(updateResultTx.data).to.equal(
         updateResultData,
-        "callData should be `updateResult` for all oracles"
+        "There should be a tx to update oracles for every cType"
+      );
+
+      expect(updateCollateralPriceTx.data).to.equal(
+        IOracleRelayer__factory.createInterface().encodeFunctionData(
+          "updateCollateralPrice",
+          [collateralTypes[index] as string]
+        ),
+        "There should be a tx to update the oracle relayer for every cType"
       );
     });
   });

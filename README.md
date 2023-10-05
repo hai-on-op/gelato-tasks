@@ -43,9 +43,9 @@ yarn create-task:state-update
 ### Deployed Web3 Functions
 #### Optimism Goerli
 - Oracle updater: 
-  - IPFS CID: `QmeQMLxY2hJYzypn5UcaZaVfWx16dc6banxGX1P7pCPMJu`
-  - Task ID: `0x3f9cf242e5ee07ac1dfbffe4e774f56b6c703a6106c8f30ce880417a09e84a29`
-  - Deployment Tx: `0x1a7e20a6c8645e5c774652fcf45be378d61da1637b82e04a2fc9376ef0f19c06`
+  - IPFS CID: `QmRsPRdzYcpmY66b2oYYPmEsWynQys7mdgy6ccRH6v2jiM`
+  - Task ID: `0x6f9d0fd1007ac401def003be869c895d29c19832d1fd663cd82900150230479d`
+  - Deployment Tx: `0xb2a4f0818aa03ce54e8ec3e703ee599ef27b44540239bda3106cfe26f50f75f5`
 - Debt popper:
   - IPFS CID: `QmerskF12CsftbBMFsbwgtF18ibrhxNPoVne1Zmvhqmavu`
   - Task ID: `0x66848342b1d9f7678352fbcc9cfa31318557963116c0e0bfc6906b2b49405ca5`
