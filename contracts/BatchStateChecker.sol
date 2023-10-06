@@ -3,7 +3,9 @@ pragma solidity ^0.8.13;
 
 interface IAccountingEngineLike {
     function auctionDebt() external returns (uint256 _auctionId);
+
     function auctionSurplus() external returns (uint256 _auctionId);
+
     function transferExtraSurplus() external;
 }
 
@@ -23,7 +25,10 @@ contract BatchStateChecker {
         bool shouldTransferSurplus;
     }
 
-    constructor(IAccountingEngineLike _accountingEngine, IPIDRateSetterLike _pidRateSetter) {
+    constructor(
+        IAccountingEngineLike _accountingEngine,
+        IPIDRateSetterLike _pidRateSetter
+    ) {
         GlobalStatus memory _data;
 
         try _pidRateSetter.updateRate() {

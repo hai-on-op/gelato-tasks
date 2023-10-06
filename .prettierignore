@@ -7,3 +7,4 @@ contracts/vendor
 typechain
 yarn.lock
 yarn-error.log
+.tmp

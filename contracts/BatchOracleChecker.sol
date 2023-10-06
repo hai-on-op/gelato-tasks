@@ -3,6 +3,7 @@ pragma solidity ^0.8.13;
 
 interface IDelayedOracleLike {
     function lastUpdateTime() external view returns (uint256 _lastUpdateTime);
+
     function shouldUpdate() external view returns (bool _shouldUpdate);
 }
 
@@ -13,7 +14,9 @@ interface IOracleRelayerLike {
         uint256 liquidationCRatio;
     }
 
-    function cParams(bytes32 _cType) external view returns (OracleRelayerCollateralParams memory _cParams);
+    function cParams(
+        bytes32 _cType
+    ) external view returns (OracleRelayerCollateralParams memory _cParams);
 }
 
 /**
@@ -29,8 +32,13 @@ contract BatchOracleChecker {
 
     mapping(bytes32 => OracleStatus) public delayedOracles;
 
-    constructor(IOracleRelayerLike _oracleRelayer, bytes32[] memory _collateralTypes) {
-        OracleStatus[] memory _data = new OracleStatus[](_collateralTypes.length);
+    constructor(
+        IOracleRelayerLike _oracleRelayer,
+        bytes32[] memory _collateralTypes
+    ) {
+        OracleStatus[] memory _data = new OracleStatus[](
+            _collateralTypes.length
+        );
 
         for (uint256 _i; _i < _collateralTypes.length; _i++) {
             bytes32 _cType = _collateralTypes[_i];
@@ -38,7 +46,10 @@ contract BatchOracleChecker {
             _data[_i] = OracleStatus({
                 cType: _cType,
                 oracle: _oracleRelayer.cParams(_cType).oracle,
-                shouldUpdate: _oracleRelayer.cParams(_cType).oracle.shouldUpdate()
+                shouldUpdate: _oracleRelayer
+                    .cParams(_cType)
+                    .oracle
+                    .shouldUpdate()
             });
         }
 

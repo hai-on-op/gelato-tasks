@@ -5,7 +5,7 @@ import {
   Web3Function,
 } from "@gelatonetwork/automate-sdk";
 
-import * as userArgs from "../web3-functions/debt-popper/userArgs.json"
+import * as userArgs from "../web3-functions/debt-popper/userArgs.json";
 
 const { ethers, w3f } = hre;
 
@@ -47,7 +47,7 @@ const main = async () => {
     await web3Function.secrets.set(secrets, taskId);
     console.log(`Secrets set`);
   }
-}
+};
 
 main()
   .then(() => {

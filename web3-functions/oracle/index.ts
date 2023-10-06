@@ -42,22 +42,25 @@ Web3Function.onRun(async (context: Web3FunctionContext) => {
     // Filter out oracles that don't need to be updated
     .filter(({ shouldUpdate }) => shouldUpdate)
     // Map the remaining oracles to update the oracle result and relayer's collateral price
-    .reduce((acc, { oracle, cType }) => [
-      ...acc,
-      {
-        to: oracle,
-        data: IDelayedOracle__factory.createInterface().encodeFunctionData(
-          "updateResult"
-        ),
-      },
-      {
-        to: userArgs.oracleRelayerAddress as string,
-        data: IOracleRelayer__factory.createInterface().encodeFunctionData(
-          "updateCollateralPrice",
-          [cType]
-        ),
-      }
-    ], [] as Web3FunctionResultCallData[]);
+    .reduce(
+      (acc, { oracle, cType }) => [
+        ...acc,
+        {
+          to: oracle,
+          data: IDelayedOracle__factory.createInterface().encodeFunctionData(
+            "updateResult"
+          ),
+        },
+        {
+          to: userArgs.oracleRelayerAddress as string,
+          data: IOracleRelayer__factory.createInterface().encodeFunctionData(
+            "updateCollateralPrice",
+            [cType]
+          ),
+        },
+      ],
+      [] as Web3FunctionResultCallData[]
+    );
 
   // Return the transaction requests if there are any
   if (txs.length) {

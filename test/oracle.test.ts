@@ -55,7 +55,10 @@ describe("Oracle Update Tests", function () {
     expect(result.callData.length).to.be.gt(0);
 
     // divide the txs into chunks of 2, each chunk should be relative to a cType
-    const chunks = splitIntoChunks(result.callData as Web3FunctionResultCallData[], 2);
+    const chunks = splitIntoChunks(
+      result.callData as Web3FunctionResultCallData[],
+      2
+    );
 
     // iterate over the chunks and check that the txs are correct
     chunks.forEach(([updateResultTx, updateCollateralPriceTx], index) => {

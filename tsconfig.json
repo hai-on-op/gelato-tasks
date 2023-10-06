@@ -1,6 +1,10 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
+    "target": "ES2015",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
@@ -13,6 +17,7 @@
   "files": ["hardhat.config.ts"],
   "include": [
     "hardhat",
+    "contracts",
     "deploy",
     "scripts",
     "src",

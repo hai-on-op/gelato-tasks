@@ -21,19 +21,24 @@ cp .env.example .env
 ```
 
 - Complete your `.env` file with your private settings
+
 ```
 ALCHEMY_ID=
 PRIVATE_KEY=
 ```
 
 ## Testing Web3 Functions
+
 To test the web3 functions, using a provider fork (requires `env.ALCHEMY_ID`), you can use the following command:
+
 ```
 yarn test
 ```
 
 ## Deploying Web3 Functions
+
 To deploy the web3 functions (requires `env.PRIVATE_KEY`), you can use the following commands:
+
 ```
 yarn create-task:oracle
 yarn create-task:debt-popper
@@ -41,8 +46,10 @@ yarn create-task:state-update
 ```
 
 ### Deployed Web3 Functions
+
 #### Optimism Goerli
-- Oracle updater: 
+
+- Oracle updater:
   - IPFS CID: `QmRsPRdzYcpmY66b2oYYPmEsWynQys7mdgy6ccRH6v2jiM`
   - Task ID: `0x6f9d0fd1007ac401def003be869c895d29c19832d1fd663cd82900150230479d`
   - Deployment Tx: `0xb2a4f0818aa03ce54e8ec3e703ee599ef27b44540239bda3106cfe26f50f75f5`
