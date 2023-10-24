@@ -5,12 +5,12 @@ import {
   Web3Function,
 } from "@gelatonetwork/automate-sdk";
 
-import * as userArgs from "../web3-functions/oracle/userArgs.json";
+import * as userArgs from "../web3-functions/state-update/userArgs.json";
 
 const { ethers, w3f } = hre;
 
 const main = async () => {
-  const oracleW3f = w3f.get("oracle");
+  const stateUpdateW3f = w3f.get("state-update");
 
   const [deployer] = await ethers.getSigners();
   const chainId = (await ethers.provider.getNetwork()).chainId;
@@ -20,18 +20,18 @@ const main = async () => {
 
   // Deploy Web3Function on IPFS
   console.log("Deploying Web3Function on IPFS...");
-  const cid = await oracleW3f.deploy();
+  const cid = await stateUpdateW3f.deploy();
   console.log(`Web3Function IPFS CID: ${cid}`);
 
   // Create task using automate sdk
-  console.log(`Creating oracle updater`);
+  console.log(`Creating state updater`);
   const { taskId, tx } = await automate.createBatchExecTask({
-    name: "Web3Function - Update Oracle",
+    name: "Web3Function - State Updater",
     web3FunctionHash: cid,
     web3FunctionArgs: userArgs,
     trigger: {
       type: TriggerType.TIME,
-      interval: 60000, // ms (1 min)
+      interval: 1800000, // ms (30 min)
       start: undefined,
     },
   });
@@ -42,7 +42,7 @@ const main = async () => {
   );
 
   // Set task specific secrets
-  const secrets = oracleW3f.getSecrets();
+  const secrets = stateUpdateW3f.getSecrets();
   if (Object.keys(secrets).length > 0) {
     await web3Function.secrets.set(secrets, taskId);
     console.log(`Secrets set`);

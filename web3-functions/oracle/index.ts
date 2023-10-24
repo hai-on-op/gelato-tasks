@@ -1,63 +1,77 @@
 import {
   Web3Function,
   Web3FunctionContext,
+  Web3FunctionResultCallData,
 } from "@gelatonetwork/web3-functions-sdk";
-import { Contract } from "@ethersproject/contracts";
-import ky from "ky"; // we recommend using ky as axios doesn't support fetch by default
+import { ethers } from "ethers";
+import {
+  IDelayedOracle__factory,
+  IOracleRelayer__factory,
+} from "../../typechain/factories";
+import BatchOracleChecker from "../../artifacts/contracts/BatchOracleChecker.sol/BatchOracleChecker.json";
 
-const ORACLE_ABI = [
-  "function lastUpdated() external view returns(uint256)",
-  "function updatePrice(uint256)",
-];
+interface SafeData {
+  cType: string;
+  oracle: string;
+  shouldUpdate: boolean;
+}
 
 Web3Function.onRun(async (context: Web3FunctionContext) => {
   const { userArgs, multiChainProvider } = context;
-
   const provider = multiChainProvider.default();
-  // Retrieve Last oracle update time
-  const oracleAddress =
-    (userArgs.oracle as string) ?? "0x71B9B0F6C999CBbB0FeF9c92B80D54e4973214da";
-  let lastUpdated;
-  let oracle;
-  try {
-    oracle = new Contract(oracleAddress, ORACLE_ABI, provider);
-    lastUpdated = parseInt(await oracle.lastUpdated());
-    console.log(`Last oracle update: ${lastUpdated}`);
-  } catch (err) {
-    return { canExec: false, message: `Rpc call failed` };
+
+  // Encode the input data
+  const inputData = ethers.utils.defaultAbiCoder.encode(
+    ["address", "bytes32[]"],
+    [userArgs.oracleRelayerAddress, userArgs.collateralTypes]
+  );
+
+  // Generate payload from input data
+  const payload = BatchOracleChecker.bytecode.concat(inputData.slice(2));
+
+  // Call the deployment transaction with the payload
+  const returnedData = await provider.call({ data: payload });
+
+  // Parse the returned value to the struct type in order
+  const decoded = ethers.utils.defaultAbiCoder.decode(
+    [`tuple(bytes32 cType, address oracle, bool shouldUpdate)[]`],
+    returnedData
+  )[0] as SafeData[];
+
+  const txs = decoded
+    // Filter out oracles that don't need to be updated
+    .filter(({ shouldUpdate }) => shouldUpdate)
+    // Map the remaining oracles to update the oracle result and relayer's collateral price
+    .reduce(
+      (acc, { oracle, cType }) => [
+        ...acc,
+        {
+          to: oracle,
+          data: IDelayedOracle__factory.createInterface().encodeFunctionData(
+            "updateResult"
+          ),
+        },
+        {
+          to: userArgs.oracleRelayerAddress as string,
+          data: IOracleRelayer__factory.createInterface().encodeFunctionData(
+            "updateCollateralPrice",
+            [cType]
+          ),
+        },
+      ],
+      [] as Web3FunctionResultCallData[]
+    );
+
+  // Return the transaction requests if there are any
+  if (txs.length) {
+    return {
+      canExec: true,
+      callData: txs,
+    };
   }
 
-  // Check if it's ready for a new update
-  const nextUpdateTime = lastUpdated + 3600; // 1h
-  const timestamp = (await provider.getBlock("latest")).timestamp;
-  console.log(`Next oracle update: ${nextUpdateTime}`);
-  if (timestamp < nextUpdateTime) {
-    return { canExec: false, message: `Time not elapsed` };
-  }
-
-  // Get current price on coingecko
-  const currency = (userArgs.currency as string) ?? "ethereum";
-  let price = 0;
-  try {
-    const coingeckoApi = `https://api.coingecko.com/api/v3/simple/price?ids=${currency}&vs_currencies=usd`;
-
-    const priceData: { [key: string]: { usd: number } } = await ky
-      .get(coingeckoApi, { timeout: 5_000, retry: 0 })
-      .json();
-    price = Math.floor(priceData[currency].usd);
-  } catch (err) {
-    return { canExec: false, message: `Coingecko call failed` };
-  }
-  console.log(`Updating price: ${price}`);
-
-  // Return execution call data
   return {
-    canExec: true,
-    callData: [
-      {
-        to: oracleAddress,
-        data: oracle.interface.encodeFunctionData("updatePrice", [price]),
-      },
-    ],
+    canExec: false,
+    message: "No oracles to update",
   };
 });
