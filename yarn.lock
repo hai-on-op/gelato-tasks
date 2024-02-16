@@ -715,20 +715,25 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
 
-"@gelatonetwork/automate-sdk@2.18.0-beta":
-  version "2.18.0-beta"
-  resolved "https://registry.yarnpkg.com/@gelatonetwork/automate-sdk/-/automate-sdk-2.18.0-beta.tgz#be108f2fd7270d68539286a57285729d9e74f69f"
-  integrity sha512-v285FFbMYyK37tLvEt+bqVdcXFBXhpBkYrg07+X2qVXtvNoUem4GYt8sODZPus/DPk18WHPkqp+wUPuZvVojQA==
+"@fastify/busboy@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@fastify/busboy/-/busboy-2.1.0.tgz#0709e9f4cb252351c609c6e6d8d6779a8d25edff"
+  integrity sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==
+
+"@gelatonetwork/automate-sdk@3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@gelatonetwork/automate-sdk/-/automate-sdk-3.0.5.tgz#fa3095db81f08569af8e5665ca8ddec6ee5adf36"
+  integrity sha512-ImrmUB5IIQDTyX+8bjwj5UxA4AH+QodkYpeOJhhwCLNyiTfV+lvkJKv19VB0zjvegnk7U8BNruzX5nRnrZzCDw==
   dependencies:
     axios "^1.4.0"
     buffer "^6.0.3"
     ethers "^5.5.2"
     siwe "^1.1.6"
 
-"@gelatonetwork/web3-functions-sdk@2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@gelatonetwork/web3-functions-sdk/-/web3-functions-sdk-2.1.3.tgz#b52b802c7691d69bb1ce561f65e69d6358372c8f"
-  integrity sha512-3VfBSOSnxxr43YmIWtRv6i9udUHLoCbeyE7C8hjQoWNDaIVsVfYEC7uWxxY+1XuIvNwc8R5ha4k735fgYiWpKQ==
+"@gelatonetwork/web3-functions-sdk@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@gelatonetwork/web3-functions-sdk/-/web3-functions-sdk-2.3.0.tgz#f9d3271ab0d4e4659ed41c6123bd9f753aa5d4b5"
+  integrity sha512-M8ll1Z/9VMkuopegV7WfzR9M0dZPH9Y502BPW9cODGdLXAOMAlpvHLcniJGItaLZhdstwxyGuFhLqSwwpOX10g==
   dependencies:
     "@ethersproject/address" "^5.7.0"
     "@ethersproject/contracts" "^5.7.0"
@@ -739,6 +744,7 @@
     axios "1.1.2"
     body-parser "^1.20.1"
     colors "^1.4.0"
+    deep-object-diff "^1.1.9"
     deno-bin "^1.36.0"
     dockerode "^3.3.4"
     dotenv "^16.0.3"
@@ -747,28 +753,28 @@
     express "^4.18.2"
     form-data "^4.0.0"
     ky "^0.32.2"
-    object-hash "^3.0.0"
     pidusage "^3.0.1"
     semver "^7.5.0"
     signal-exit "^3.0.7"
     tar "^6.1.12"
+    undici "^6.6.2"
 
-"@hai-on-op/abis@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@hai-on-op/abis/-/abis-0.1.2.tgz#eb9f78b6f2ea1929a96b8817f2b4ed4d6c3fe4fe"
-  integrity sha512-i43YZHD4BFmywaepnvYMrWCDVxiEkBJH9PctXhaNAp27w93AqsyGaiesXuxu1TCFq3MTMP8XdFAh3ReWbVNc/w==
+"@hai-on-op/abis@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@hai-on-op/abis/-/abis-1.0.0.tgz#8bf08b1d2319e3126c4e488aad3460d907bbb4f4"
+  integrity sha512-LJ0u+mneJhtU5RTmkIox7P4AewSsL4iKWWghrp+9K1EO99aD+uNAI3rAEVjwhBw7YatRpxdm6B2E0kkWPWC5Jg==
   dependencies:
     "@defi-wonderland/solidity-utils" "0.0.0-4298c6c6"
     "@ethersproject/abi" "5.7.0"
     "@ethersproject/providers" "5.7.2"
-    "@openzeppelin/contracts" "4.8.2"
-    "@typechain/ethers-v6" "^0.5.0"
-    "@typechain/web3-v1" "^6.0.6"
+    "@openzeppelin/contracts" "5.0.0"
+    "@typechain/ethers-v6" "^0.5.1"
+    "@typechain/web3-v1" "^6.0.7"
     "@uniswap/v3-periphery" "https://github.com/Uniswap/v3-periphery.git#0.8"
     bn.js "5.2.1"
     ethers "6.0.3"
-    forge-std "https://github.com/foundry-rs/forge-std.git#e8a047e3f40f13fa37af6fe14e6e06283d9a060e"
-    typechain "^8.3.1"
+    forge-std "https://github.com/foundry-rs/forge-std.git#f73c73d2018eb6a111f35e4dae7b4f27401e9421"
+    typechain "^8.3.2"
 
 "@humanwhocodes/config-array@^0.11.8":
   version "0.11.8"
@@ -1126,10 +1132,10 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.8.1.tgz#709cfc4bbb3ca9f4460d60101f15dac6b7a2d5e4"
   integrity sha512-xQ6eUZl+RDyb/FiZe1h+U7qr/f4p/SrTSQcTPH2bjur3C5DbuW/zFgCU/b1P/xcIaEqJep+9ju4xDRi3rmChdQ==
 
-"@openzeppelin/contracts@4.8.2":
-  version "4.8.2"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.8.2.tgz#d815ade0027b50beb9bcca67143c6bcc3e3923d6"
-  integrity sha512-kEUOgPQszC0fSYWpbh2kT94ltOJwj1qfT2DWo+zVttmGmf97JZ99LspePNaeeaLhCImaHVeBbjaQFZQn7+Zc5g==
+"@openzeppelin/contracts@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-5.0.0.tgz#ee0e4b4564f101a5c4ee398cd4d73c0bd92b289c"
+  integrity sha512-bv2sdS6LKqVVMLI5+zqnNrNU/CA+6z6CmwFXm/MzmOPBRSO5reEJN7z0Gbzvs0/bv/MZZXNklubpwy3v2+azsw==
 
 "@scure/base@~1.1.0":
   version "1.1.1"
@@ -1336,10 +1342,10 @@
     lodash "^4.17.15"
     ts-essentials "^7.0.1"
 
-"@typechain/ethers-v6@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@typechain/ethers-v6/-/ethers-v6-0.5.0.tgz#841a63a61272448b72dfc8f53d32d7813709ef62"
-  integrity sha512-wsz7AvbY5n2uVwpS2RHDYsW6wYOrhWxeTLFpxuzhO62w/ZDQEVIipArX731KA/hdqygP2zJ2RTkVXgzU1WrU1g==
+"@typechain/ethers-v6@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@typechain/ethers-v6/-/ethers-v6-0.5.1.tgz#42fe214a19a8b687086c93189b301e2b878797ea"
+  integrity sha512-F+GklO8jBWlsaVV+9oHaPh5NJdd6rAKN4tklGfInX1Q7h0xPgVLP39Jl3eCulPB5qexI71ZFHwbljx4ZXNfouA==
   dependencies:
     lodash "^4.17.15"
     ts-essentials "^7.0.1"
@@ -1351,10 +1357,10 @@
   dependencies:
     fs-extra "^9.1.0"
 
-"@typechain/web3-v1@^6.0.6":
-  version "6.0.6"
-  resolved "https://registry.yarnpkg.com/@typechain/web3-v1/-/web3-v1-6.0.6.tgz#115fc5ee18578ea4b090c65d823a425c72714e51"
-  integrity sha512-oHHETjYisbINuUIBkaq5x4pfNuhlbw+18/W6IJhwnu9/mEKoySotmmnNL5SemeNPH6aba6vCIkjTIwpit200BQ==
+"@typechain/web3-v1@^6.0.7":
+  version "6.0.7"
+  resolved "https://registry.yarnpkg.com/@typechain/web3-v1/-/web3-v1-6.0.7.tgz#7da0b3bcdb16a173b73f9e3c9d5a47daffe65138"
+  integrity sha512-HWkGplyPL3eWiP0sszqKZh6Bjrdm23srtirUdKp/4BEWKp/o6zofLt8lDn468bRQlQdHaobrbfEeT+3gf/r4eg==
   dependencies:
     lodash "^4.17.15"
     ts-essentials "^7.0.1"
@@ -2868,6 +2874,11 @@ deep-is@^0.1.3, deep-is@~0.1.3:
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
 
+deep-object-diff@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/deep-object-diff/-/deep-object-diff-1.1.9.tgz#6df7ef035ad6a0caa44479c536ed7b02570f4595"
+  integrity sha512-Rn+RuwkmkDwCi2/oXOFS9Gsr5lJZu/yTGpK7wAaAIE75CC+LCGEZHpY6VQJa/RoJcrmaA/docWJZvYohlNkWPA==
+
 defer-to-connect@^2.0.0, defer-to-connect@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/defer-to-connect/-/defer-to-connect-2.0.1.tgz#8016bdb4143e4632b77a3449c6236277de520587"
@@ -3813,9 +3824,9 @@ forever-agent@~0.6.1:
   version "1.6.0"
   resolved "https://github.com/foundry-rs/forge-std#705263c95892a906d7af65f0f73ce8a4a0c80b80"
 
-"forge-std@https://github.com/foundry-rs/forge-std.git#e8a047e3f40f13fa37af6fe14e6e06283d9a060e":
-  version "1.5.6"
-  resolved "https://github.com/foundry-rs/forge-std.git#e8a047e3f40f13fa37af6fe14e6e06283d9a060e"
+"forge-std@https://github.com/foundry-rs/forge-std.git#f73c73d2018eb6a111f35e4dae7b4f27401e9421":
+  version "1.7.1"
+  resolved "https://github.com/foundry-rs/forge-std.git#f73c73d2018eb6a111f35e4dae7b4f27401e9421"
 
 form-data-encoder@1.7.1:
   version "1.7.1"
@@ -5566,11 +5577,6 @@ object-assign@^4, object-assign@^4.1.0, object-assign@^4.1.1:
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==
 
-object-hash@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-3.0.0.tgz#73f97f753e7baffc0e2cc9d6e079079744ac82e9"
-  integrity sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==
-
 object-inspect@^1.12.2, object-inspect@^1.9.0:
   version "1.12.3"
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.12.3.tgz#ba62dffd67ee256c8c086dfae69e016cd1f198b9"
@@ -7170,10 +7176,10 @@ typechain@8.2.0:
     ts-command-line-args "^2.2.0"
     ts-essentials "^7.0.1"
 
-typechain@^8.3.1:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/typechain/-/typechain-8.3.1.tgz#dccbc839b94877997536c356380eff7325395cfb"
-  integrity sha512-fA7clol2IP/56yq6vkMTR+4URF1nGjV82Wx6Rf09EsqD4tkzMAvEaqYxVFCavJm/1xaRga/oD55K+4FtuXwQOQ==
+typechain@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/typechain/-/typechain-8.3.2.tgz#1090dd8d9c57b6ef2aed3640a516bdbf01b00d73"
+  integrity sha512-x/sQYr5w9K7yv3es7jo4KTX05CLxOf7TRWwoHlrjRh8H82G64g+k7VuWPJlgMo6qrjfCulOdfBjiaDtmhFYD/Q==
   dependencies:
     "@types/prettier" "^2.1.1"
     debug "^4.3.1"
@@ -7224,6 +7230,13 @@ undici@^5.14.0:
   integrity sha512-HOjK8l6a57b2ZGXOcUsI5NLfoTrfmbOl90ixJDl0AEFG4wgHNDQxtZy15/ZQp7HhjkpaGlp/eneMgtsu1dIlUA==
   dependencies:
     busboy "^1.6.0"
+
+undici@^6.6.2:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-6.6.2.tgz#8dce5ae54e8a3bc7140c2b2a0972b5fde9a88efb"
+  integrity sha512-vSqvUE5skSxQJ5sztTZ/CdeJb1Wq0Hf44hlYMciqHghvz+K88U0l7D6u1VsndoFgskDcnU+nG3gYmMzJVzd9Qg==
+  dependencies:
+    "@fastify/busboy" "^2.0.0"
 
 universalify@^0.1.0:
   version "0.1.2"

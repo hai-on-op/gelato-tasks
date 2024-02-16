@@ -8,7 +8,7 @@ export async function forkBlock(block: number) {
     params: [
       {
         forking: {
-          jsonRpcUrl: `https://opt-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_ID}`,
+          jsonRpcUrl: `https://opt-sepolia.g.alchemy.com/v2/${process.env.SEPOLIA_ALCHEMY_ID}`,
           blockNumber: block,
         },
       },

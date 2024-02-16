@@ -16,8 +16,11 @@ dotenv.config({ path: __dirname + "/.env" });
 import assert from "assert";
 
 // Process Env Variables
-const ALCHEMY_ID = process.env.ALCHEMY_ID;
-assert.ok(ALCHEMY_ID, "no Alchemy ID in process.env");
+const MAINNET_ALCHEMY_ID = process.env.MAINNET_ALCHEMY_ID;
+const SEPOLIA_ALCHEMY_ID = process.env.SEPOLIA_ALCHEMY_ID;
+
+assert.ok(MAINNET_ALCHEMY_ID, "no Mainnet Alchemy ID in process.env");
+assert.ok(SEPOLIA_ALCHEMY_ID, "no Sepolia Alchemy ID in process.env");
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY;
@@ -27,7 +30,7 @@ const config: HardhatUserConfig = {
   w3f: {
     rootDir: "./web3-functions",
     debug: false,
-    networks: ["optimism", "optimismGoerli"], // (multiChainProvider) injects provider for these networks
+    networks: ["optimism", "optimismSepolia"], // (multiChainProvider) injects provider for these networks
   },
 
   namedAccounts: {
@@ -42,14 +45,13 @@ const config: HardhatUserConfig = {
     // Prod
     optimism: {
       chainId: 10,
-      url: "https://mainnet.optimism.io",
+      url: `https://opt-mainnet.g.alchemy.com/v2/${MAINNET_ALCHEMY_ID}`,
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
     },
-
     // Staging
-    optimismGoerli: {
-      chainId: 420,
-      url: `https://opt-goerli.g.alchemy.com/v2/${ALCHEMY_ID}`,
+    optimismSepolia: {
+      chainId: 11155420,
+      url: `https://opt-sepolia.g.alchemy.com/v2/${SEPOLIA_ALCHEMY_ID}`,
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
     },
   },
