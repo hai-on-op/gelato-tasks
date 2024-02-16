@@ -47,7 +47,37 @@ yarn create-task:state-update
 
 ### Deployed Web3 Functions
 
-#### Optimism Goerli
+#### Optimism Sepolia
+
+- Oracle updater:
+  - IPFS CID: `QmbVxFZY686uHn7XF8t5SekoaUfAngfeQZLGieAqBjRWo3`
+  - Task ID: `0x29f278c875d9a6514789e44a4bd16275cd4c81ea97b217977a54ae370e4f60ce`
+  - Deployment Tx: `0x518122963289f8e0aa5b25d0c9cfb69f9e2d84c01df3cb3fdd5618b73780608c`
+- Debt popper:
+  - IPFS CID: `QmZzsj9vKHsHcyPueg24JLUyXxpJ7ZCLq7F6A5fTvr4NYE`
+  - Task ID: `0x6f20e28573a51ff66c8262d76bbc104ef9828ef54dc1eef9118f046ccf9f59b1`
+  - Deployment Tx: `0x33b528fa9837bc9aa0597f120de53e3fa886c51c84ed59bf7df47f382fcbeeda`
+- State updater:
+  - IPFS CID: `QmRYExCRxZCGXEtruFLZkKD6MneN3Ly4KAjWFnB5rdctMG`
+  - Task ID: `0x42309fa568048ff6a2c37166cef4c86bab9fa9104bd19f9d073fbc03d56903ce`
+  - Deployment Tx: `0xdc37b197d0a2a56a2e285112cdd7461cd47210b2a219edcc37193f78706e0ad8`
+
+#### Optimism Mainnet
+
+- Oracle updater:
+  - IPFS CID: `QmbVxFZY686uHn7XF8t5SekoaUfAngfeQZLGieAqBjRWo3`
+  - Task ID: `0x7e650a45da3c00be3176deb94d0cecb5499df340452d54d671522720781d241b`
+  - Deployment Tx: `0xa8849f91f2311b55ac53d7c425adbd4cd9970434c09c0938a42ffd783abc5b65`
+- Debt popper:
+  - IPFS CID: `QmZzsj9vKHsHcyPueg24JLUyXxpJ7ZCLq7F6A5fTvr4NYE`
+  - Task ID: `0xdf46115725041eed1446d13de60ba8abb758489b57a51fcc6c26f61888fc05c3`
+  - Deployment Tx: `0xa4ee5beca3c7b49f65d43a4bb2bbf4a33c2284f0560f85b1e1d85d04dc5c20a4`
+- State updater:
+  - IPFS CID: `QmRYExCRxZCGXEtruFLZkKD6MneN3Ly4KAjWFnB5rdctMG`
+  - Task ID: `0x999e021a6ba777c2e500808a9041320893f6aa90264a22196171d77cec0a43aa`
+  - Deployment Tx: `0x991a38003bf8503048ba8079f0240ba05e9736c180c84219f464f7367ca53244`
+
+#### Optimism Goerli [DEPRECATED]
 
 - Oracle updater:
   - IPFS CID: `QmRsPRdzYcpmY66b2oYYPmEsWynQys7mdgy6ccRH6v2jiM`
