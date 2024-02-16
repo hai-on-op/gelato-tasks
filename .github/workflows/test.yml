@@ -21,13 +21,14 @@ jobs:
 
       - name: Install dependencies
         run: yarn
-        
+
       - name: Create env file
         run: |
-            touch .env
-            echo ALCHEMY_ID="${{ secrets.ALCHEMYKEY }}" >> .env
-            cat .env
-            
+          touch .env
+          echo SEPOLIA_ALCHEMY_ID="${{ secrets.SEPOLIA_ALCHEMY_ID }}" >> .env
+          echo MAINNET_ALCHEMY_ID="${{ secrets.MAINNET_ALCHEMY_ID }}" >> .env
+          cat .env
+
       - name: Build project
         run: yarn build
 
