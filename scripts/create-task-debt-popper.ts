@@ -26,7 +26,7 @@ const main = async () => {
   // Create task using automate sdk
   console.log(`Creating debt popper`);
   const { taskId, tx } = await automate.createBatchExecTask({
-    name: "Web3Function - Debt Popper",
+    name: "Web3Fn() - HAI Mainnet Debt Popper v1.1",
     web3FunctionHash: cid,
     web3FunctionArgs: userArgs,
     trigger: {
@@ -37,9 +37,7 @@ const main = async () => {
   });
   await tx.wait();
   console.log(`Task created, taskId: ${taskId} (tx hash: ${tx.hash})`);
-  console.log(
-    `> https://beta.app.gelato.network/task/${taskId}?chainId=${chainId}`
-  );
+  console.log(`> https://app.gelato.network/task/${taskId}?chainId=${chainId}`);
 
   // Set task specific secrets
   const secrets = debtPopperW3f.getSecrets();
