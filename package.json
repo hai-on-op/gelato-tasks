@@ -17,9 +17,12 @@
     "lint:sol": "solhint contracts/**/*.sol",
     "test": "npx hardhat test",
     "verify": "npx hardhat etherscan-verify",
-    "create-task:oracle": "npx hardhat run ./scripts/create-task-oracle.ts --network optimismGoerli",
-    "create-task:debt-popper": "npx hardhat run ./scripts/create-task-debt-popper.ts --network optimismGoerli",
-    "create-task:state-update": "npx hardhat run ./scripts/create-task-state-update.ts --network optimismGoerli"
+    "create-task:oracle:mainnet": "npx hardhat run ./scripts/create-task-oracle.ts --network optimism",
+    "create-task:debt-popper:mainnet": "npx hardhat run ./scripts/create-task-debt-popper.ts --network optimism",
+    "create-task:state-update:mainnet": "npx hardhat run ./scripts/create-task-state-update.ts --network optimism",
+    "create-task:oracle:sepolia": "npx hardhat run ./scripts/create-task-oracle.ts --network optimismSepolia",
+    "create-task:debt-popper:sepolia": "npx hardhat run ./scripts/create-task-debt-popper.ts --network optimismSepolia",
+    "create-task:state-update:sepolia": "npx hardhat run ./scripts/create-task-state-update.ts --network optimismSepolia"
   },
   "license": "ISC",
   "devDependencies": {
